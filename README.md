@@ -1,2 +1,2 @@
-# sr.config
+# sr-modules
 ShadowRocket config, for claude/openai/ ...
