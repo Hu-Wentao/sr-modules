@@ -1,45 +1,46 @@
 #!name=Anthropic / Claude 分流规则
 #!desc=Anthropic、Claude 及相关 CDN、遥测、客服域名与 IP 兜底规则
 #!category=AI
+#!arguments=分流策略:PROXY, 屏蔽策略:REJECT-DROP
+#!arguments-desc=分流策略\n\n· 默认使用首页节点进行分流\n\n· 可以输入节点名称或者代理分组名称进行修改\n\n屏蔽策略\n\n· 默认屏蔽，可选填 Proxy 等其他策略
 
 [Rule]
 # === 核心域名 ===
-DOMAIN-SUFFIX,anthropic.com
-DOMAIN-SUFFIX,claude.ai
-DOMAIN-SUFFIX,claude.com
-DOMAIN-SUFFIX,clau.de
-DOMAIN-SUFFIX,claudemcpclient.com
-DOMAIN-SUFFIX,claudemcpcontent.com
-DOMAIN-SUFFIX,claudeusercontent.com
+DOMAIN-SUFFIX,anthropic.com,{{{分流策略}}}
+DOMAIN-SUFFIX,claude.ai,{{{分流策略}}}
+DOMAIN-SUFFIX,claude.com,{{{分流策略}}}
+DOMAIN-SUFFIX,clau.de,{{{分流策略}}}
+DOMAIN-SUFFIX,claudemcpclient.com,{{{分流策略}}}
+DOMAIN-SUFFIX,claudemcpcontent.com,{{{分流策略}}}
+DOMAIN-SUFFIX,claudeusercontent.com,{{{分流策略}}}
 
 # === CDN 和静态资源 ===
-DOMAIN,servd-anthropic-website.b-cdn.net
-DOMAIN,anthropic.com.cdn.cloudflare.net
+DOMAIN,servd-anthropic-website.b-cdn.net,{{{分流策略}}}
+DOMAIN,anthropic.com.cdn.cloudflare.net,{{{分流策略}}}
 
 # === 认证 / 内容 ===
-DOMAIN,anthropic.auth0.com
-DOMAIN,anthropic-com.ghost.io
+DOMAIN,anthropic.auth0.com,{{{分流策略}}}
+DOMAIN,anthropic-com.ghost.io,{{{分流策略}}}
 
 # === 监控和遥测 ===
-DOMAIN-SUFFIX,sentry.io
-DOMAIN-SUFFIX,statsigapi.net
-DOMAIN,browser-intake-us5-datadoghq.com
-DOMAIN-KEYWORD,datadog
-DOMAIN-KEYWORD,sift
+DOMAIN-SUFFIX,sentry.io,{{{屏蔽策略}}}
+DOMAIN-SUFFIX,statsigapi.net,{{{屏蔽策略}}}
+DOMAIN,browser-intake-us5-datadoghq.com,{{{屏蔽策略}}}
+DOMAIN-KEYWORD,datadog,{{{屏蔽策略}}}
+DOMAIN-KEYWORD,sift,{{{屏蔽策略}}}
 
 # === 客服 / 第三方 widget ===
-DOMAIN-SUFFIX,intercom.io
-DOMAIN-SUFFIX,intercomcdn.com
-DOMAIN,cdn.usefathom.com
+DOMAIN-SUFFIX,intercom.io,{{{分流策略}}}
+DOMAIN-SUFFIX,intercomcdn.com,{{{分流策略}}}
+DOMAIN,cdn.usefathom.com,{{{分流策略}}}
 
 # === IP 段 / ASN 兜底 ===
-IP-CIDR,160.79.104.0/21,no-resolve
-IP-CIDR6,2607:6bc0::/32,no-resolve
-IP-ASN,399358,no-resolve
+IP-CIDR,160.79.104.0/21,{{{分流策略}}},no-resolve
+IP-CIDR6,2607:6bc0::/32,{{{分流策略}}},no-resolve
+IP-ASN,399358,{{{分流策略}}},no-resolve
 
 # === 关键词兜底 ===
-DOMAIN-KEYWORD,anthropic
-DOMAIN-KEYWORD,claude
-DOMAIN-KEYWORD,datadog
-DOMAIN-KEYWORD,sentry
-DOMAIN-KEYWORD,sift
+DOMAIN-KEYWORD,anthropic,{{{分流策略}}}
+DOMAIN-KEYWORD,claude,{{{分流策略}}}
+DOMAIN-KEYWORD,datadog,{{{分流策略}}}
+DOMAIN-KEYWORD,sentry,{{{分流策略}}}
